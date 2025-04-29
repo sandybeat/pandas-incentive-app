@@ -83,7 +83,7 @@ if st.button("Process File"):
             excel_file = pd.ExcelFile(uploaded_file)
             sheet_names = excel_file.sheet_names
             if not sheet_names:
-                st.error("The uploaded file does not contain any sheets.")
+                st.error("The uploaded file does NOT contain any sheets.")
             else:
                 selected_sheet = st.selectbox("Select a sheet to analyze", sheet_names)
                 df = pd.read_excel(uploaded_file, sheet_name=selected_sheet)
