@@ -60,22 +60,21 @@ def categorizeIncentive(row):
         if sc == 'A+' and role == 'Store Manager':
             if ach > 20:
                 base_incentive = 20 * cfg['mid_val']
-                excess_incentive = (ach - 20) * cfg['high_val']
+                excess_incentive = ((ach - 20) * cfg['high_val'])
                 incentive = base_incentive + excess_incentive
             else:
                 incentive = ach * cfg['mid_val']
-                
-        if achievement_pct > 1.10 and not (sc == 'A+' and role == 'Store Manager'):
-            excess = ach - (tgt * 1.10)
-            excess_incentive = excess * cfg['high_val']
-            mid_portion = (tgt * 1.10)
-            mid_incentive = mid_portion * cfg['mid_val']
-            incentive = excess_incentive + mid_incentive
-        elif not (sc == 'A+' and role == 'Store Manager'):
-            mid_portion = ach - (tgt * 0.95)
-            incentive += mid_portion * cfg['mid_val']
+        else:       
+            if achievement_pct > 1.10:
+                excess = ach - (tgt * 1.10)
+                excess_incentive = (excess * cfg['high_val']) 
+                mid_portion = (tgt * 1.10)
+                mid_incentive = mid_portion * cfg['mid_val']
+                incentive = excess_incentive + mid_incentive
+            else:
+                incentive += ach * cfg['mid_val']
 
-    return incentive * 1000
+        return incentive * 1000
 
 if st.button("Process File"):
     if uploaded_file:
