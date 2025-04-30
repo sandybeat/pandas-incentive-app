@@ -45,9 +45,6 @@ def categorizeIncentive(row):
     ach = pd.to_numeric(row.get('ach', 0), errors='coerce')
     tgt = pd.to_numeric(row.get('TGT', 0), errors='coerce')
 
-    excess_incentive = 0  # Initialize excess incentive
-    mid_incentive = 0     # Initialize mid incentive
-
     if sc == 'D':
         for low, high, amt in thresholds[('D', None)]['ranges']:
             if low <= ach < high:
@@ -65,10 +62,8 @@ def categorizeIncentive(row):
                 base_incentive = 20 * cfg['mid_val']
                 excess_incentive = (ach - 20) * cfg['high_val']
                 incentive = base_incentive + excess_incentive
-                mid_incentive = base_incentive
             else:
                 incentive = ach * cfg['mid_val']
-                mid_incentive = incentive
                 
         if achievement_pct > 1.10 and not (sc == 'A+' and role == 'Store Manager'):
             excess = ach - (tgt * 1.10)
@@ -78,11 +73,8 @@ def categorizeIncentive(row):
             incentive = excess_incentive + mid_incentive
         elif not (sc == 'A+' and role == 'Store Manager'):
             mid_portion = ach - (tgt * 0.95)
-            mid_incentive = mid_portion * cfg['mid_val']
-            incentive += mid_incentive
+            incentive += mid_portion * cfg['mid_val']
 
-    row['Excess Incentive'] = excess_incentive * 1000
-    row['Mid Incentive'] = mid_incentive * 1000
     return incentive * 1000
 
 if st.button("Process File"):
@@ -102,8 +94,6 @@ if st.button("Process File"):
                 dfNew = df.copy()
 
                 dfNew['Incentive'] = dfNew.apply(categorizeIncentive, axis=1)
-                dfNew['Excess Incentive'] = dfNew.apply(lambda row: row.get('Excess Incentive', 0), axis=1)
-                dfNew['Mid Incentive'] = dfNew.apply(lambda row: row.get('Mid Incentive', 0), axis=1)
                 st.dataframe(dfNew)
 
                 st.subheader("Download Processed Data")
