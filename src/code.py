@@ -5,7 +5,7 @@ st.title("Excel Sheet Analyzing Application")
 
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx", "xls"])
 
-thresholds = {
+thresholds_1 = {
     ('A+', 'Store Manager'):           {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.10},
     ('A+', 'Asst. Store Manager'):     {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.50},
     ('A+', 'Cashier'):                 {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.80, 'high_val': 0.80},
@@ -16,7 +16,7 @@ thresholds = {
     ('A', 'Store Manager'):            {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.50},
     ('A', 'Asst. Store Manager'):      {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.50},
     ('A', 'Cashier'):                  {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.80, 'high_val': 0.80},
-    ('A', 'Retail Executive'):         {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 0.01},
+    ('A', 'Retail Executive'):         {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
     ('A', 'Tailor'):                   {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
     ('A', 'VM Manager'):               {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
     ('A', 'Stock Lead'):               {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
@@ -37,6 +37,90 @@ thresholds = {
     }
 }
 
+thresholds_2 = {
+    ('A+', 'Store Manager'):           {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.10},
+    ('A+', 'Asst. Store Manager'):     {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.50},
+    ('A+', 'Cashier'):                 {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.80, 'high_val': 0.80},
+    ('A+', 'Retail Executive'):        {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('A+', 'Tailor'):                  {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
+    ('A+', 'VM Manager'):              {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
+    ('A+', 'Stock Lead'):              {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('A', 'Store Manager'):            {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.50},
+    ('A', 'Asst. Store Manager'):      {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.50},
+    ('A', 'Cashier'):                  {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.80, 'high_val': 0.80},
+    ('A', 'Retail Executive'):         {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('A', 'Tailor'):                   {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
+    ('A', 'VM Manager'):               {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
+    ('A', 'Stock Lead'):               {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('B', 'Store Manager'):            {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.75},
+    ('B', 'Asst. Store Manager'):      {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.50},
+    ('B', 'Cashier'):                  {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.80, 'high_val': 0.80},
+    ('B', 'Retail Executive'):         {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('B', 'Tailor'):                   {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
+    ('C', 'Store Manager'):            {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.40, 'high_val': 0.75},
+    ('C', 'Retail Executive'):         {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('D', None): {
+        'ranges': [
+            (0.00, 5.99,   0),
+            (6.00, 6.99, 10000),
+            (7.00, 7.99, 14000),
+            (8.00, float('inf'), 25000),
+        ]
+    }
+}
+
+thresholds_3 = {
+    ('A+', 'Store Manager'):           {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.10},
+    ('A+', 'Asst. Store Manager'):     {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.50},
+    ('A+', 'Cashier'):                 {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.80, 'high_val': 0.80},
+    ('A+', 'Retail Executive'):        {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('A+', 'Tailor'):                  {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
+    ('A+', 'VM Manager'):              {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.10, 'high_val': 0.20},
+    ('A+', 'Stock Lead'):              {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.75, 'high_val': 1.00},
+    ('A', 'Store Manager'):            {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.40, 'high_val': 0.60},
+    ('A', 'Asst. Store Manager'):      {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.60},
+    ('A', 'Cashier'):                  {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.90, 'high_val': 0.90},
+    ('A', 'Retail Executive'):         {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('A', 'Tailor'):                   {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('A', 'VM Manager'):               {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('A', 'Stock Lead'):               {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('B', 'Store Manager'):            {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.40, 'high_val': 0.85},
+    ('B', 'Asst. Store Manager'):      {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.60},
+    ('B', 'Cashier'):                  {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.90, 'high_val': 0.90},
+    ('B', 'Retail Executive'):         {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('B', 'Tailor'):                   {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('C', 'Store Manager'):            {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.50, 'high_val': 0.85},
+    ('C', 'Retail Executive'):         {'low': 0.90, 'high': 1.00, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('D', None): {
+        'ranges': [
+            (0.00, 5.99,   0),
+            (6.00, 6.99, 10000),
+            (7.00, 7.99, 14000),
+            (8.00, float('inf'), 25000),
+        ]
+    }
+}
+
+st.sidebar.title("Threshold Selection")
+threshold_option = st.sidebar.selectbox(
+    "Select Threshold Model",
+    options=["Model 1 (Original)", "Model 2", "Model 3"],
+    index=0
+)
+
+if threshold_option == "Thresholds 1":
+    thresholds = thresholds_1
+    lowval = 0.95
+    highval = 1.10
+elif threshold_option == "Thresholds 2":
+    thresholds = thresholds_2
+    lowval = 0.90
+    highval = 1.00
+else:
+    thresholds = thresholds_3
+    lowval = 0.90
+    highval = 1.00
+
 def categorizeIncentive(row):
     sc = row['STORE CLASS']
     role = row['ROLE']
@@ -56,7 +140,7 @@ def categorizeIncentive(row):
         return 0
 
     incentive = 0
-    if achievement_pct > 0.95:
+    if achievement_pct > lowval:
         if sc == 'A+' and role == 'Store Manager':
             if ach > 20:
                 base_incentive = 20 * cfg['mid_val']
@@ -65,10 +149,10 @@ def categorizeIncentive(row):
             else:
                 incentive = ach * cfg['mid_val']
         else:       
-            if achievement_pct > 1.10:
-                excess = ach - (tgt * 1.10)
+            if achievement_pct > highval:
+                excess = ach - (tgt * highval)
                 excess_incentive = (excess * cfg['high_val']) 
-                mid_portion = (tgt * 1.10)
+                mid_portion = (tgt * highval)
                 mid_incentive = mid_portion * cfg['mid_val']
                 incentive = excess_incentive + mid_incentive
             else:
@@ -79,13 +163,20 @@ def categorizeIncentive(row):
 if st.button("Process File"):
     if uploaded_file:
         try:
-            excel_file = pd.ExcelFile(uploaded_file)
+            if uploaded_file.name.endswith('.xlsx'):
+                engine = 'openpyxl'
+            elif uploaded_file.name.endswith('.xls'):
+                engine = 'xlrd'
+            excel_file = pd.ExcelFile(uploaded_file, engine=engine)
             sheet_names = excel_file.sheet_names
+
             if not sheet_names:
                 st.error("The uploaded file does NOT contain any sheets.")
             else:
                 selected_sheet = st.selectbox("Select a sheet to analyze", sheet_names)
-                df = pd.read_excel(uploaded_file, sheet_name=selected_sheet)
+                uploaded_file.seek(0)  # Reset pointer before reading again
+                df = pd.read_excel(uploaded_file, sheet_name=selected_sheet, engine=engine)
+
                 st.success(f"Sheet '{selected_sheet}' loaded successfully!")
                 
                 st.subheader("Preview of the Excel Sheet")
