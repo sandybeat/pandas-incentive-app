@@ -121,6 +121,11 @@ else:
     lowval = 0.90
     highval = 1.00
 
+# Debug space to display the selected threshold model
+st.sidebar.subheader("Debug Information")
+st.sidebar.write(f"Selected Threshold Model: {threshold_option}")
+st.sidebar.write(f"Low Value: {lowval}, High Value: {highval}")
+
 def categorizeIncentive(row):
     sc = row['STORE CLASS']
     role = row['ROLE']
@@ -179,8 +184,6 @@ if st.button("Process File"):
 
                 st.success(f"Sheet '{selected_sheet}' loaded successfully!")
                 
-                st.subheader("Preview of the Excel Sheet")
-                st.dataframe(df)
                 dfNew = df.copy()
 
                 dfNew['Incentive'] = dfNew.apply(categorizeIncentive, axis=1)
