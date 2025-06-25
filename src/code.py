@@ -108,11 +108,11 @@ threshold_option = st.sidebar.selectbox(
     index=0
 )
 
-if threshold_option == "Thresholds 1":
+if threshold_option == "Model 1 (Original)":
     thresholds = thresholds_1
     lowval = 0.95
     highval = 1.10
-elif threshold_option == "Thresholds 2":
+elif threshold_option == "Model 2":
     thresholds = thresholds_2
     lowval = 0.90
     highval = 1.00
