@@ -189,8 +189,12 @@ if st.button("Process File"):
                 dfNew['Incentive'] = dfNew.apply(categorizeIncentive, axis=1)
                 st.dataframe(dfNew)
 
+                # Exclude hidden and unnamed columns from the CSV export
+                visible_columns = [col for col in dfNew.columns if not col.startswith('_') and not col.startswith('Unnamed')]
+                df_export = dfNew[visible_columns]
+
                 st.subheader("Download Processed Data")
-                csv = dfNew.to_csv(index=False).encode('utf-8')
+                csv = df_export.to_csv(index=False).encode('utf-8')
                 st.download_button(
                     label="Download as CSV",
                     data=csv,
