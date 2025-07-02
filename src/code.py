@@ -101,30 +101,71 @@ thresholds_3 = {
     }
 }
 
-st.sidebar.title("Threshold Selection")
-threshold_option = st.sidebar.selectbox(
-    "Select Threshold Model",
-    options=["Model 1 (Original)", "Model 2", "Model 3"],
-    index=0
-)
+thresholds_F = {
+    ('A+', 'Store Manager'):           {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.40, 'high_val': 0.20},
+    ('A+', 'Asst. Store Manager'):     {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.60},
+    ('A+', 'Cashier'):                 {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.90, 'high_val': 0.90},
+    ('A+', 'Retail Executive'):        {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('A+', 'Tailor'):                  {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('A+', 'VM Manager'):              {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('A+', 'Stock Lead'):              {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('A', 'Store Manager'):            {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.40, 'high_val': 0.60},
+    ('A', 'Asst. Store Manager'):      {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.60},
+    ('A', 'Cashier'):                  {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.90, 'high_val': 0.90},
+    ('A', 'Retail Executive'):         {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('A', 'Tailor'):                   {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('A', 'VM Manager'):               {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('A', 'Stock Lead'):               {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('B', 'Store Manager'):            {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.40, 'high_val': 0.85},
+    ('B', 'Asst. Store Manager'):      {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.30, 'high_val': 0.60},
+    ('B', 'Cashier'):                  {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.90, 'high_val': 0.90},
+    ('B', 'Retail Executive'):         {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('B', 'Tailor'):                   {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.20, 'high_val': 0.30},
+    ('C', 'Store Manager'):            {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.50, 'high_val': 0.85},
+    ('C', 'Retail Executive'):         {'low': 0.95, 'high': 1.10, 'low_val': 0.00, 'mid_val': 0.85, 'high_val': 1.10},
+    ('D', None): {
+        'ranges': [
+            (0.00, 5.99,   0),
+            (6.00, 6.99, 10000),
+            (7.00, 7.99, 14000),
+            (8.00, float('inf'), 25000),
+        ]
+    }
+}
 
-if threshold_option == "Model 1 (Original)":
-    thresholds = thresholds_1
-    lowval = 0.95
-    highval = 1.10
-elif threshold_option == "Model 2":
-    thresholds = thresholds_2
-    lowval = 0.90
-    highval = 1.00
-else:
-    thresholds = thresholds_3
-    lowval = 0.90
-    highval = 1.00
+thresholds = thresholds_F
+lowval = 0.95
+highval = 1.10
+
+# Sidebar for threshold selection
+# st.sidebar.title("Threshold Selection")
+# threshold_option = st.sidebar.selectbox(
+#     "Select Threshold Model",
+#     options=["Model 1 (Original)", "Model 2", "Model 3", "Final Model"],
+#     index=0
+# )
+
+# if threshold_option == "Model 1 (Original)":
+#     thresholds = thresholds_1
+#     lowval = 0.95
+#     highval = 1.10
+# elif threshold_option == "Model 2":
+#     thresholds = thresholds_2
+#     lowval = 0.90
+#     highval = 1.00
+# elif threshold_option == "Model 3":
+#     thresholds = thresholds_3
+#     lowval = 0.90
+#     highval = 1.00
+# else:
+#     thresholds = thresholds_F
+#     lowval = 0.95
+#     highval = 1.10
 
 # Debug space to display the selected threshold model
-st.sidebar.subheader("Debug Information")
-st.sidebar.write(f"Selected Threshold Model: {threshold_option}")
-st.sidebar.write(f"Low Value: {lowval}, High Value: {highval}")
+# st.sidebar.subheader("Debug Information")
+# st.sidebar.write(f"Selected Threshold Model: {threshold_option}")
+# st.sidebar.write(f"Low Value: {lowval}, High Value: {highval}")
 
 def categorizeIncentive(row):
     sc = row['STORE CLASS']
@@ -189,8 +230,8 @@ if st.button("Process File"):
                 dfNew['Incentive'] = dfNew.apply(categorizeIncentive, axis=1)
                 st.dataframe(dfNew)
 
-                # Exclude hidden and unnamed columns from the CSV export
-                visible_columns = [col for col in dfNew.columns if not col.startswith('_') and not col.startswith('Unnamed')]
+                # Exclude hidden columns from the CSV export
+                visible_columns = [col for col in dfNew.columns if not col.startswith('_')]
                 df_export = dfNew[visible_columns]
 
                 st.subheader("Download Processed Data")
